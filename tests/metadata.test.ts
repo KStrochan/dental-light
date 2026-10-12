@@ -29,7 +29,7 @@ describe("buildMetadata", () => {
 
   test("canonical and og:url are absolute and page specific", () => {
     const meta = buildMetadata(site, { path: "/pricing" });
-    expect(meta.alternates?.canonical).toBe("https://dental-light.vercel.app/pricing");
-    expect(meta.openGraph).toMatchObject({ url: "https://dental-light.vercel.app/pricing" });
+    expect(meta.alternates?.canonical).toBe("https://dental-light-phi.vercel.app/pricing");
+    expect(meta.openGraph).toMatchObject({ url: "https://dental-light-phi.vercel.app/pricing" });
   });
 });

@@ -6,19 +6,16 @@ A private dental clinic for the whole family, from check-ups and hygiene to impl
 
 ## Status
 
-In progress. The groundwork is done: brand colors and fonts, the contact form with Telegram delivery, metadata, tests and a Lighthouse check. The pages below are next.
+Live at https://dental-light-phi.vercel.app
 
-Pages:
+What is built:
 
-- [ ] Home
-- [ ] Services and prices
-- [ ] Doctors
-- [ ] Book a visit
-- [ ] Contact
+- Home: treatments and prices, doctors with their days, patient quotes
+- Online booking (`/book`): treatment, doctor, day strip and free times from a typed demo diary, sent as a booking request
+- Visit us page (`/contact`) with hours and a question form
 
-Features:
+Still to do:
 
-- [ ] Online booking (service, doctor, date, time) that checks free slots in a typed schedule
 - [ ] Before and after slider
 
 ## Design
@@ -73,11 +70,11 @@ Enquiries go to a Telegram chat. Copy `.env.example` to `.env.local` and fill in
 
 ## Deploying
 
-Import the repository in Vercel and add the two Telegram variables if the form should deliver leads. Update `url` in `content/site.ts` once the site has its final domain.
+Import the repository in Vercel and add the two Telegram variables if the form should deliver leads. If the domain changes, update `url` in `content/site.ts` and `tests/metadata.test.ts`.
 
 ## Credits
 
-Fonts are licensed under the SIL Open Font License; the license texts are in `app/fonts`. Photos will come from Unsplash and are credited in the site footer.
+Fonts are licensed under the SIL Open Font License; the license texts are in `app/fonts`. Photos are hotlinked from Unsplash and credited in the site footer.
 
 ## License
 
