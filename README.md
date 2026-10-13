@@ -13,10 +13,12 @@ What is built:
 - Home: treatments and prices, doctors with their days, patient quotes
 - Online booking (`/book`): treatment, doctor, day strip and free times from a typed demo diary, sent as a booking request
 - Visit us page (`/contact`) with hours and a question form
+- Shade guide on the home page: drag through the whitening scale on a drawn smile
+- Motion: a smile drawn under the headline, a breathing halo and sparkles round the hero photo, and reveals as you scroll, all in CSS and respecting reduced motion
 
 Still to do:
 
-- [ ] Before and after slider
+- [ ] Before and after gallery once real patient photos (with consent) are available
 
 ## Design
 

@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import type { CSSProperties } from "react";
+import { Reveal } from "@/components/anim/Reveal";
+import { ShadeGuide } from "@/components/anim/ShadeGuide";
 import { photos, promises, reviews } from "@/content/clinic";
 import { site } from "@/content/site";
 import { buildMetadata } from "@/lib/metadata";
@@ -17,9 +20,17 @@ export default function HomePage() {
     <main id="main">
       <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 pb-16 pt-8 sm:px-6 md:grid-cols-[1.1fr_1fr] md:pt-14">
         <div className="grid content-start gap-7">
-          <h1 className="font-display text-5xl font-semibold leading-[1.08] sm:text-6xl">
-            Gentle dentistry for the whole family.
-          </h1>
+          <div className="grid gap-2">
+            <h1 className="font-display text-5xl font-semibold leading-[1.08] sm:text-6xl">
+              Gentle dentistry for the whole family.
+            </h1>
+            <svg viewBox="0 0 320 44" className="h-8 w-64 overflow-visible sm:h-10 sm:w-80" aria-hidden="true">
+              <path d="M6 12 Q 160 52 314 12" pathLength={1} className="draw-in" style={{ "--d": "0.5s" } as CSSProperties} fill="none" stroke="#2F5D4A" strokeWidth="4" strokeLinecap="round" />
+              <g className="pop-in" style={{ "--d": "1.9s", transformOrigin: "314px 12px" } as CSSProperties}>
+                <path d="M314 0 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3z" fill="#2F5D4A" />
+              </g>
+            </svg>
+          </div>
           <p className="max-w-lg text-lg text-muted">
             Check-ups, hygiene, fillings, implants and aligners in one calm clinic on Linden Avenue. Book online in
             under a minute and see the price before you come in.
@@ -36,7 +47,17 @@ export default function HomePage() {
             Open six days a week. New patients welcome, children from age 2.
           </p>
         </div>
-        <div className="relative">
+        <div className="relative isolate">
+          <span aria-hidden="true" className="halo absolute -inset-y-6 inset-x-0 -z-10 rounded-full bg-surface blur-2xl sm:-inset-x-6" />
+          {[
+            { top: "6%", left: "14%", size: 22, d: "0s" },
+            { top: "16%", left: "82%", size: 16, d: "1.1s" },
+            { top: "2%", left: "58%", size: 12, d: "2s" },
+          ].map((s) => (
+            <svg key={s.left} aria-hidden="true" viewBox="0 0 24 24" width={s.size} height={s.size} className="twinkle absolute z-10" style={{ top: s.top, left: s.left, "--d": s.d } as CSSProperties}>
+              <path d="M12 0c.9 6.3 4.8 10.2 12 12-7.2 1.8-11.1 5.7-12 12-.9-6.3-4.8-10.2-12-12C7.2 10.2 11.1 6.3 12 0z" fill="#FFFFFF" stroke="#2F5D4A" strokeWidth="1.2" />
+            </svg>
+          ))}
           <Image
             src={unsplash(photos.office, 1200)}
             alt="Bright, modern treatment room with a dental chair"
@@ -47,8 +68,11 @@ export default function HomePage() {
             fetchPriority="high"
             className="arch aspect-[6/7] h-auto w-full bg-surface object-cover"
           />
-          <div className="card absolute -bottom-6 left-4 max-w-[15rem] p-4 shadow-lg sm:-left-8">
-            <p className="text-sm text-muted">Next free check-up</p>
+          <div className="card float-y absolute -bottom-6 left-4 max-w-[15rem] p-4 shadow-lg sm:-left-8">
+            <p className="flex items-center gap-2 text-sm text-muted">
+              <span aria-hidden="true" className="pulse-dot h-2 w-2 rounded-full bg-accent" />
+              Next free check-up
+            </p>
             <p className="font-display text-xl font-semibold">Tomorrow, 10:30</p>
           </div>
         </div>
@@ -56,11 +80,11 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <ul className="grid gap-4 md:grid-cols-3">
-          {promises.map((p) => (
-            <li key={p.title} className="rounded-3xl bg-surface p-6">
+          {promises.map((p, index) => (
+            <Reveal as="li" delay={index * 0.12} key={p.title} className="rounded-3xl bg-surface p-6">
               <h2 className="font-display text-xl font-semibold">{p.title}</h2>
               <p className="mt-2 text-muted">{p.text}</p>
-            </li>
+            </Reveal>
           ))}
         </ul>
       </section>
@@ -113,8 +137,8 @@ export default function HomePage() {
         <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
           <h2 className="font-display text-4xl font-semibold">Doctors</h2>
           <ul className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {doctors.map((d) => (
-              <li key={d.id} className="card grid content-start gap-4 p-6">
+            {doctors.map((d, index) => (
+              <Reveal as="li" delay={index * 0.12} key={d.id} className="card grid content-start gap-4 p-6">
                 <span aria-hidden="true" className="arch grid h-24 w-20 place-items-center bg-accent font-display text-2xl text-white">
                   {initials(d.name)}
                 </span>
@@ -129,10 +153,22 @@ export default function HomePage() {
                     {d.start}:00 to {d.end}:00
                   </span>
                 </p>
-              </li>
+              </Reveal>
             ))}
           </ul>
         </div>
+      </section>
+
+      <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 pt-20 sm:px-6 md:grid-cols-[1fr_1.1fr]">
+        <div className="grid content-start gap-4">
+          <h2 className="font-display text-4xl font-semibold">How white is white?</h2>
+          <p className="text-muted">
+            Dentists match tooth colour against a shade guide, from darker C4 to the bleach shades. Most patients move four
+            to six shades lighter with in-chair whitening, and the result lasts one to three years.
+          </p>
+          <p className="text-muted">Drag the slider to see the scale.</p>
+        </div>
+        <ShadeGuide />
       </section>
 
       <section className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-20 sm:px-6 md:grid-cols-2">
