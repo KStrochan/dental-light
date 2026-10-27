@@ -16,7 +16,8 @@
     "lint": "eslint .",
     "test": "vitest run",
     "check": "npm run typecheck && npm run lint && npm run test",
-    "lighthouse": "next build && npx --yes @lhci/cli@0.15.1 autorun"
+    "lighthouse": "next build && npx --yes @lhci/cli@0.15.1 autorun",
+    "test:e2e": "next build && playwright test"
   },
   "dependencies": {
     "next": "16.4.0",
@@ -25,6 +26,7 @@
     "zod": "4.6.6"
   },
   "devDependencies": {
+    "@playwright/test": "1.63.0",
     "@tailwindcss/postcss": "4.3.3",
     "@testing-library/dom": "10.4.2",
     "@testing-library/jest-dom": "7.0.1",
